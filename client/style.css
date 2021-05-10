@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+}
+
+p {
+  font-size: 20px;
+}
+
+.app {
+  height: 100%;
+  padding: 20px;
+  background-color: #161616;
+}
+
+.input {
+  display: block;
+  width: 420px;
+  padding: 15px;
+  border: 1px solid #000;
+  background-color: transparent;
+  border-radius: 8px;
+  margin: 0 auto;
+  font-size: 17px;
+  border-color: #fff;
+  color: #fff;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #b05fc1;
+}
+
+.button {
+  margin: 20px 0;
+  background: #a64daa;
+  color: #fff;
+  border-radius: 6px;
+  padding: 15px 22px;
+  font-size: 16px;;
+  outline: none;
+  border: none;
+  transition: background .2s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #85148a;
+}
