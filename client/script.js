@@ -4,8 +4,9 @@
     const input = document.querySelector('.input');
     const error = document.querySelector('.error');
     const spinner = document.querySelector('.loading');
+    const image = document.querySelector('.image');
   
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       const isValidUrl = validateHttpUrl(input.value);
       
       if (!isValidUrl) {
@@ -13,26 +14,36 @@
         return;
       }
 
-      const image = await httpRequest(input.value);
+      try {
+        startLoading();
 
+        const parsedImage = await loadImage(input.value);
+        image.src = parsedImage;
+      } catch (e) {
+        error.textContent = 'Image failed to load, please try again.'
+      }
+
+      endLoading();
     });
 
     input.addEventListener('input', () => {
       error.classList.remove('show');
-    })
+    });
+
+    function startLoading() {
+      spinner.classList.add('show');
+      button.disabled = true;
+      input.disabled = true;
+      image.src = '';
+    }
+  
+    function endLoading() {
+      spinner.classList.remove('show');
+      button.disabled = false;
+      input.disabled = false;
+      input.value = '';
+    }
   });
-
-  function startLoading() {
-    spinner.classList.add('show');
-    button.disabled = true;
-    input.disabled = true;
-  }
-
-  function endLoading() {
-    spinner.classList.remove('show');
-    button.disabled = false;
-    input.disabled = false;
-  }
 
   function validateHttpUrl(string) {
     let url;
@@ -59,8 +70,7 @@
       return image;
     } catch (e) {
       console.log('load image failed:', e.message)
-      return null;
+      throw new Error(e.message);
     }
   }
-
 })();

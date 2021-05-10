@@ -23,11 +23,9 @@ app.get('/', function(request, response) {
 
 app.get('/screenshot', async function(request, response) {
   const url = request.query.url;
-
   const image = await htmlToImage(url);
 
-  // response.json({ image });
-  response.sendFile(image)
+  response.sendFile(image);
 })
 
 async function htmlToImage(url) {
