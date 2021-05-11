@@ -5,6 +5,7 @@
     const error = document.querySelector('.error');
     const spinner = document.querySelector('.loading');
     const image = document.querySelector('.image');
+    const serverError = document.querySelector('.server-error');
   
     button.addEventListener('click', async () => {
       const isValidUrl = validateHttpUrl(input.value);
@@ -20,13 +21,14 @@
         const parsedImage = await loadImage(input.value);
         image.src = parsedImage;
       } catch (e) {
-        error.textContent = 'Image failed to load, please try again.'
+        serverError.classList.add('show');
       }
 
       endLoading();
     });
 
     input.addEventListener('input', () => {
+      serverError.classList.remove('show');
       error.classList.remove('show');
     });
 
@@ -62,7 +64,7 @@
     const params = new URLSearchParams({ url: urlParam });
 
     try {
-      const response = await fetch(`http://localhost:3002/screenshot?${params}`);
+      const response = await fetch(`http://localhost:3000/screenshot?${params}`);
       const data = await response.blob();
 
       image = URL.createObjectURL(data);
