@@ -5,7 +5,7 @@ const cors = require('cors');
 const puppeteer = require('puppeteer');
 
 
-const PORT = 3002;
+const PORT = 3000;
 
 const app = express();
 app.use(cors());
